@@ -2,14 +2,14 @@
 @Time   : 2021/9/30 上午12:44
 @Author : lan
 @Mail   : lanzy.nice@gmail.com
-@Desc   : 
+@Desc   : python connect mysql demo
 """
 
 import pymysql
 
 
 db = pymysql.connect(
-    host="stuq.ceshiren.com",
+    host="xxx.xxx.com",  # demo
     user="hogwarts_python",
     password="hogwarts_python",
     db="hogwarts_python",
