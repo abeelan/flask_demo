@@ -2,7 +2,7 @@
 @Time   : 2021/9/30 下午3:31
 @Author : lan
 @Mail   : lanzy.nice@gmail.com
-@Desc   :
+@Desc   : SQL ORM 模式
 
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/

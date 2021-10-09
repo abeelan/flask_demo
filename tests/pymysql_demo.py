@@ -3,6 +3,8 @@
 @Author : lan
 @Mail   : lanzy.nice@gmail.com
 @Desc   : python connect mysql demo
+
+需要直接执行 mysql 的命令
 """
 
 import pymysql
