@@ -20,7 +20,7 @@ app = Flask(__name__)
 # 设置 flask 关联的数据库
 # sqlite:/// 固定格式
 # /tmp/test.db 数据库生成路径
-# 这是官方的 demo，不用 sqlite
+# 这是官方的 demo，本项目不用 sqlite
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 username = "root"
