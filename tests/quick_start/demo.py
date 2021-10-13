@@ -48,6 +48,26 @@ def login():
     session["username"] = request.args.get("name")
     return res
 
+### 配合前端录播课程测试
+@app.route('/user/login', methods=["get", "post"])
+def user_login():
+    res = {
+        "method": request.method,
+        "url": request.path,
+        "args": request.args,
+        "form": request.form
+    }
+    return res
+
+@app.route('/user/register', methods=["get", "post"])
+def user_register():
+    res = {
+        "method": request.method,
+        "url": request.path,
+        "args": request.args,
+        "form": request.form
+    }
+    return res
 
 if __name__ == '__main__':
     # 调用 app.run 启动后端服务

@@ -2,15 +2,16 @@
 @Time   : 2021/9/30 下午1:27
 @Author : lan
 @Mail   : lanzy.nice@gmail.com
-@Desc   : 
+@Desc   : 单元测试用例
 """
+import random
 import requests
 
 
-class TestServer():
+class TestTestcaseService():
 
     def setup_class(self):
-        self.base_url = "http://127.0.0.1:5000/server"
+        self.base_url = "http://127.0.0.1:5000/testcase"
 
     def test_get(self):
         r = requests.get(self.base_url)
@@ -18,27 +19,42 @@ class TestServer():
         assert r.status_code == 200
 
     def test_get_by_id(self):
-        r = requests.get(self.base_url, params={"id": 2})
+        data = requests.get(self.base_url).json()
+        id = data["data"][0]["id"]
+
+        r = requests.get(self.base_url, params={"id": id})
         print(r.json())
         assert r.status_code == 200
 
+    def test_get_by_id_not_match(self):
+        r = requests.get(self.base_url, params={"id": 0})
+        assert r.status_code == 200
+        assert r.json()["error"] == 40004
+
     def test_post(self):
         # 添加用例数据
-        # data = {"id": 1, "node_id": "node01", "remark": "remark01"}
-        data = {"id": 2, "node_id": "node02", "remark": "remark02"}
+        # data = {"id": 1, "nodeId": "node01", "remark": "remark01"}
+        data = {"id": 2, "nodeId": "node02", "remark": "remark02"}
         r = requests.post(self.base_url, json=data)
         print(r.json())
         assert r.status_code == 200
 
-    def test_post_node_id_list(self):
+    def test_post_nodeId_list(self):
         """测试 node id 为列表时"""
-        data = {"id": 34, "node_id": ["node3", "node4"], "remark": "remark0304"}
+        id = random.randint(1, 1000),
+        id = id[0]
+
+        data = {
+            "id": id,
+            "nodeId": str(id),
+            "remark": "我是备注"
+        }
         r = requests.post(self.base_url, json=data)
         print(r.json())
         assert r.status_code == 200
 
     def test_put(self):
-        data = {"id": 2, "node_id": "node02-modify", "remark": "remark02-modify"}
+        data = {"id": 1, "nodeId": "node02-modify", "remark": "remark02-modify"}
         r = requests.put(self.base_url, json=data)
         print(r.json())
         assert r.status_code == 200
