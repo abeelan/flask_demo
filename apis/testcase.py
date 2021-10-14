@@ -53,17 +53,20 @@ class TestcaseService(Resource):
         app.logger.info(self.LINE)
 
         case_data = request.json
-        case_data["nodeId"] = case_data.pop("nodeId")
         app.logger.info(f"待添加数据为：{case_data}")
 
         # 从接口中拿到的字典数据进行解包，使用关键字传参传入 Data
         data = Data(**case_data)
+
         # 如果数据字段存在列表，需要做一次转换
         if isinstance(data.nodeId, list):
-            data.nodeId = json.dumps(request.json.get("nodeId"), ensure_ascii="utf-8")
+            data.nodeId = json.dumps(
+                case_data.get("nodeId"), ensure_ascii=False
+            )
 
         db.session.add(data)
         db.session.commit()
+        db.session.close()
 
         app.logger.info(f"已同步更新到数据库内")
         return {"error": 0, "message": "post success"}

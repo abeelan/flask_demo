@@ -28,6 +28,7 @@ class TaskService(Resource):
             # 查询所有数据信息
             app.logger.info(f"查询所有测试任务")
             tasks = Task.query.all()
+
             data = [task.as_dict() for task in tasks]
 
         app.logger.info(f"数据为 ==> \n{data}")
@@ -38,15 +39,20 @@ class TaskService(Resource):
         }
 
 
-def post(self):
+    def post(self):
         """
         1. 调用 jenkins 执行测试用例
         2. 将测试数据写入到数据库内
         """
         # 从 post 请求体中获取要执行的测试用例名称 - nodeId
-        data = request.json
-        nodeId = data.get("nodeId")
-        app.logger.info(f"执行的测试用例为：{nodeId}")
+        data: list = request.json
+        app.logger.info(f"前端给到的数据：{data}")
+
+        nodeIds = [d["nodeId"] for d in data]
+        app.logger.info(f"提取出 node id 的列表为：{nodeIds}")
+
+        nodeId = " ".join(nodeIds)
+        app.logger.info(f"转化格式为(最终可被pytest执行的格式): {nodeId}")
 
         # 传入要执行的测试用例文件名称即可执行，并返回测试报告连接
         report = ExecTools().invoke(nodeId)

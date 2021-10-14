@@ -19,7 +19,7 @@ class TestTaskService:
         assert r.status_code == 200
 
     def test_post(self):
-        data = {"nodeId": "test_demo.py"}
+        data = [{'id': 0, 'nodeId': 'test', 'remark': 'test'}]
         r = requests.post(self.url, json=data)
         assert r.status_code == 200
 

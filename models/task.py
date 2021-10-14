@@ -17,7 +17,7 @@ class Task(db.Model):
     remark = db.Column(db.String(120))
     report = db.Column(db.String(120))
     # 指定时间格式，如果不传值的话为当前时间
-    create_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    create_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def as_dict(self):
         """把 python 对象转换为标准的 json 格式，flask 接口才能识别"""
@@ -25,7 +25,7 @@ class Task(db.Model):
             "id": self.id,
             "remark": self.remark,
             "report": self.report,
-            "create_at": self.create_at
+            "create_at": self.create_at.strftime("%Y-%m-%d %H:%M:%S")
         }
 
 
